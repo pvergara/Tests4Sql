@@ -4,7 +4,8 @@ DELIMITER //
 CREATE PROCEDURE `Tests4Sql`.`spAssertSameResultVerbose`
 (
 	oldQryName varchar(256),
-	newQryName varchar(256)
+	newQryName varchar(256),
+	joinSpecification varchar(4000)
 )
 BEGIN
 SET @dyn_sql=CONCAT('
@@ -45,7 +46,7 @@ FROM
 ) qryTheOldOne
     ON
     (
-        qryTheNewOne.city_id = qryTheOldOne.city_id
+        ',joinSpecification,'
     );');
 PREPARE s2 from @dyn_sql; 
 EXECUTE s2; 
