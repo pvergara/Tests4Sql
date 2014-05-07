@@ -1,8 +1,9 @@
-DROP FUNCTION `Tests4Sql`.`AssertFalse_BOOL`;
+DROP FUNCTION `Tests4Sql`.`AssertEquals_DECIMAL`;
 
 DELIMITER $$
-CREATE FUNCTION `Tests4Sql`.`AssertFalse_BOOL`(
-	TheValue BOOL
+CREATE FUNCTION `Tests4Sql`.`AssertEquals_DECIMAL`(
+	Expected DECIMAL,
+	Actual DECIMAL
 ) RETURNS varchar(20) CHARSET utf8
 BEGIN
 	DEClARE RESULT NVARCHAR(20);
@@ -10,7 +11,7 @@ BEGIN
 	SELECT
 		(
 			CASE 
-				WHEN TheValue<>TRUE THEN
+				WHEN Expected=Actual THEN
 					'GREEN'
 				ELSE
 					'___RED___'
